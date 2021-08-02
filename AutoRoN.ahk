@@ -1,12 +1,12 @@
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 #Warn  ; Enable warnings to assist with detecting common errors.
-SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 t1=A_TickCount, X:=Y:=""
 TextUpdate:="|<>*158$46.9680T000YMU10007tWC41QV9594E6H4gIgNwF4Tt+VY14G+4v6E4EccFYF0F26V6C7l4AU"
 TextUpdate2:="|<>*149$69.000000000007zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzbzzzUzttztwwTyTwrz7DzDb3znzaTstztwtQkAAr33D31YNaHAVn99z9g/AmPYitBDVAX1aHQYr9Vv9YTYmNgmPC9NAVwkFVaMNl89Ybzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz000000000004"
 TextMilitaryGroups:="|<>*127$43.kTzzzzznjzzzzznzzzzzztz13aM74zUAnAnCMHb9aQbD9rYnCMbYtmNbD9mQnAnBa3D3lMC7zzzzwzzzzzzyTzzzzzzDzk"
 TextCreateGroups:="|<>*122$32.VzzyTnTzzbxyAMElTanqP7v0lY1ynt9DBiSmNsPlUn6"
+TextDisbandGroups:="|<>*87$41.zrxzzzs7jvzzzlbzrzzzXalVkkw7Bj9xYmCPCvXNgQr5qKmMnj9BhakDMksPA4"
 TextArmyGroup:="|<>*126$32.tzzzzwTzzzz3V16QotnArNiQnAaNbAn9UNnAunqQnCAwbAnnzzzzxzzzzyTzzzzDU"
 TextNavyGroup:="|<>*126$29.CTzzyAzzzwNVb3UHtirGbv9YYC6H9ANijKMqQSAtWsyTzzzxzzzznzzzzDU"
 TextAirGroup:="|<>*126$17.ztznnz7zy7ABCNnQnaNb0nAxaNtAs"
@@ -58,8 +58,38 @@ Loop {
 	MouseMove, %X%, %Y%
 	Sleep 5
 	Click
-	Goto Next1
+	Goto NextB
 }
+}
+NextB:
+Loop {
+	if ok:=FindText(751, 356, 1175, 704, 0, 0, TextDisbandGroups)
+    {
+	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+	MouseMove, %X%, %Y%
+	Sleep 5
+	Click
+	Goto NextC
+	}
+	else 
+	{
+	goto Next1
+	}
+}
+	
+NextC:
+Loop {
+	if ok:=FindText(777, 488, 1127, 560, 0, 0 TextDisbandGroups)
+    {
+	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+	Goto NextB
+	}
+	else 
+	{
+	Goto NextB
+	}
 }
 Next1:
 Loop {
