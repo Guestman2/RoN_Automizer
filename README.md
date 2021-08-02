@@ -9,5 +9,5 @@ Do note that there are a few issues with this at the moment that will be patched
 
 UPCOMING CHANGES:
 -Increased Reliability of Auto justify
--Auto groups deletes any groups previously created
--Update functionality built into the script itself.
+-Auto groups deletes any groups previously created (ADDED)
+-Update functionality built into the script itself. (ADDED)
