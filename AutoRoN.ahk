@@ -531,7 +531,7 @@ Send {z 1}
 Sleep 5
 Return
 
-gUpdate:
+Update:
 Check_ForUpdate(1,0)
 return
 
