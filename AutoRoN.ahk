@@ -2,8 +2,9 @@
 #Warn  ; Enable warnings to assist with detecting common errors.
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
-
 t1=A_TickCount, X:=Y:=""
+TextUpdate:="|<>*158$46.9680T000YMU10007tWC41QV9594E6H4gIgNwF4Tt+VY14G+4v6E4EccFYF0F26V6C7l4AU"
+TextUpdate2:="|<>*149$69.000000000007zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzbzzzUzttztwwTyTwrz7DzDb3znzaTstztwtQkAAr33D31YNaHAVn99z9g/AmPYitBDVAX1aHQYr9Vv9YTYmNgmPC9NAVwkFVaMNl89Ybzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz000000000004"
 TextMilitaryGroups:="|<>*127$43.kTzzzzznjzzzzznzzzzzztz13aM74zUAnAnCMHb9aQbD9rYnCMbYtmNbD9mQnAnBa3D3lMC7zzzzwzzzzzzyTzzzzzzDzk"
 TextCreateGroups:="|<>*122$32.VzzyTnTzzbxyAMElTanqP7v0lY1ynt9DBiSmNsPlUn6"
 TextArmyGroup:="|<>*126$32.tzzzzwTzzzz3V16QotnArNiQnAaNbAn9UNnAunqQnCAwbAnnzzzzxzzzzyTzzzzDU"
@@ -536,7 +537,7 @@ Return
 Update:
 AA:= URLDownloadToVar("https://raw.githubusercontent.com/Guestman2/RoN_Automizer/main/Update.txt")
 msgbox % AA
-
+autoronstring=AutoRoN.ahk
 URLDownloadToVar(url) {
  WebRequest := ComObjCreate("WinHttp.WinHttpRequest.5.1")
  WebRequest.Open("GET", url)
@@ -563,9 +564,29 @@ return
 
 Yes:
 Run, https://raw.githubusercontent.com/Guestman2/RoN_Automizer/main/AutoRoN.ahk
-Sleep 1000
-MsgBox All you have to do now is save the page as AutoRoN.ahk, and replace the existing file with the new one, then relaunch the Macro.
+Loop {
+	if ok:=FindText(0, 67, 1916, 1025, 0, 0, TextUpdate)
+    {
+	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+	Goto Yes1
+}
+}
+Yes1:
+Send {Ctrl down}{s}{Ctrl up}
 Gui Update:Cancel
+Loop {
+	if ok:=FindText(0, 0, 1918, 1078, 0, 0, TextUpdate2)
+    {
+	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+	Send {BS}
+	Sleep 5
+	Send % autoronstring
+	Goto Yes2
+}
+}
+Yes2:
 return
 
 GuiClose:
