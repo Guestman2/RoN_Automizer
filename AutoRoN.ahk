@@ -34,7 +34,7 @@ Gui, Add, Button, w200 h50 gAutoGroup , (Use early game) Automatic Military Grou
 Gui, Add, Button, w200 h50 gAutoRes , Automatic Research Rush
 Gui, Add, Button, w200 h50 gAutoDem , (WIP) Brazil/India Auto War Democracy
 Gui, Add, Button, w200 h50 gAutoJus , China autojustify Kazak + Taiwan
-Gui, Add, Button, w200 h50 gUpdate , Check for Update (WIP)
+Gui, Add, Button, w200 h50 gUpdate , Check for Update
 Gui, Show,, RoN Automater v1
 Return
 
@@ -553,6 +553,7 @@ if Instr(AA, "Version1")
 }
 else
 {
+	Msgbox There are no updates availible at this time.
 	Gosub Home1
 }
 return
@@ -561,8 +562,9 @@ Gui Update:Cancel
 return
 
 Yes:
-Run, https://github.com/Guestman2/RoN_Automizer/blob/main/AutoRoN.ahk
-MsgBox "All you have to do now is save the page as AutoRoN.ahk, and replace the existing file with the new one, then relaunch the Macro."
+Run, https://raw.githubusercontent.com/Guestman2/RoN_Automizer/main/AutoRoN.ahk
+Sleep 1000
+MsgBox All you have to do now is save the page as AutoRoN.ahk, and replace the existing file with the new one, then relaunch the Macro.
 Gui Update:Cancel
 return
 
