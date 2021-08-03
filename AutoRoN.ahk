@@ -36,6 +36,7 @@ Gui, Add, Button, w200 h50 gAutoRes , Automatic Research Rush
 Gui, Add, Button, w200 h50 gAutoDem , (WIP) Brazil/India Auto War Democracy
 Gui, Add, Button, w200 h50 gAutoJus , China autojustify Kazak + Taiwan
 Gui, Add, Button, w200 h50 gUpdate , Check for Update
+Gui, Add, Button, w200 h50 gReadme , View Readme
 Gui, Show,, RoN Automater v1
 Return
 
@@ -619,6 +620,10 @@ Loop {
 Yes2:
 return
 
+Readme:
+READMESTRING:= URLDownloadToVar("https://raw.githubusercontent.com/Guestman2/RoN_Automizer/main/README.md")
+msgbox % READMESTRING
+return
 GuiClose:
 ExitApp
 
