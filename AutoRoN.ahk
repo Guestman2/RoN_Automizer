@@ -18,10 +18,12 @@ TextResearchScroll:="|<>*140$14.zDznz03k0w0D7X1s0S333k0w0D03zDzny"
 TextResearch4:="|<>*125$77.zzzzzznzzzzzsQzzzwzbzzzzzktzzzszDzzzzzUXXf7psH8MSAQ16nBb/YqymNqG+dqkCHNhlgb0gFHhbw4n3/NCSMqqPbnhbCqnCSlxlrXb8CQBb6A4"
 TextResearch5:="|<>*131$44.zzzzyzzrzzzzjzxzzzzzzzTX3ECks7qSn9gapw6BqPNhTT/RaqMLnqrNhaw6ABqPNUzzzzzzvDzzzzzy6"
 TextResearch6:="|<>*126$47.VzzzwzzyNzzztzzxvNVVVNV3mnv9an9bZb6nBanDPAhaPBaAqPPAqPB3UkqQUqPjzzzzzzzXzzzzzzs"
+TextCountryBarOffset:="|<>*119$2.3w8"
 TextCountryBar:="|<>*29$71.000000000001zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk00000000000000000000000000000000000000000000000000000000007zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
 TextKazak:="|<>*121$57.zzzzTTzzzvjzzvvztzzNzzzTTzDzuQA8P8QEVV3xtvH9jDgUSCQMvAtlg9Zb/3NlAhXhgvPPD9hgQV13NNXYBY"
 TextKazak2:="|<>*136$82.zzzzzyTnzzzzzwwzzzztzDzyTzznbzzzzbwzztzzzATzzzyTnzzbzzwnsS1Vtn8w867YET0s43aQ1UUEC00ylwv6HlaP7gMkFw7bkMDCMQT1b1b6QwNUwtsllaQCAlnn69nat7ANkwk610NnCM641b3tWM69bAtksMaQU"
-TextKazak3:="|<>*124$57.zzzzTTzzzvjzzvvztzzNzzzTTzDzuQA8P8QEVV3xtvH9jDgUSCQMvAtlg9Zb/3NlAhXhgvPPD9hgQV13NNXYBY"
+UnusedTextKazak3:="|<>*124$57.zzzzTTzzzvjzzvvztzzNzzzTTzDzuQA8P8QEVV3xtvH9jDgUSCQMvAtlg9Zb/3NlAhXhgvPPD9hgQV13NNXYBY"
+TextKazak4:="|<>*116$10.67N1gGn/0gU"
 TextTaiwan:="|<>*114$36.zzjzzz0zjzzznzzzzznVdgVVnxh5xYnlh5lgnYgFYgnggFggnUiHUgU"
 TextTaiwan2:="|<>*135$51.07zDzzzzs0ztzzzzzwzzzzzzzzbVt6QsSFws7Ala1k7bgNaAv6Awy3ApjUnbb6NkVlaQwtXC4CMnbb0NlVk6QwwHCCT4nY"
 TextJustify:="|<>*118$66.zzzznXzzzzztzztnDzbAzztzztzDzaAzztaMEG1nqAVktaPtnBrmBwntaNtnAbmVyntaQNnAbmVkntaT9nCjkVanNaP9nCDtlgn3kMQHDDtnWnzzzzzzTzzzzzzzzzyTzzzzzzzzzwzzzzzU"
@@ -31,7 +33,7 @@ TextJustWar:="|<>*117$66.zzzznXzzzzztzztnDzbAzztzztzDzaAzztaMEG1nqAVktaPtnBrmBwn
 TextViewOwn:="|<>*120$58.ztzzzzzzzwxbzzzsTzznbzzzzAzzziNlaNtuNY6NaPNbbZaH9iPYWSyG9AotUGftt+gn3az2Dbg8nASNyMzAtXAttktXy7aAm"
 goto Home
 Home:
-Gui, Add, Button, w200 h50 gAutoGroup , (Use early game) Automatic Military Groups 
+Gui, Add, Button, w200 h50 gAutoGroup , Automatic Military Groups 
 Gui, Add, Button, w200 h50 gAutoRes , Automatic Research Rush
 Gui, Add, Button, w200 h50 gAutoDem , (WIP) Brazil/India Auto War Democracy
 Gui, Add, Button, w200 h50 gAutoJus , China autojustify Kazak + Taiwan
@@ -78,10 +80,35 @@ Loop {
 	goto Next1
 	}
 }
-	
 NextC:
 Loop {
+	if ok:=FindText(1047, 433, 1121, 489, 0, 0, TextDisbandGroups)
+    {
+	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+	Goto NextD
+	}
+	else 
+	{
+	Goto NextD
+	}
+}	
+NextD:
+Loop {
 	if ok:=FindText(777, 488, 1127, 560, 0, 0 TextDisbandGroups)
+    {
+	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+	Goto NextE
+	}
+	else 
+	{
+	Goto NextE
+	}
+}
+NextE:
+Loop {
+	if ok:=FindText(1045, 556, 1135, 620, 0, 0, TextDisbandGroups)
     {
 	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
 	;------------------------------
@@ -353,7 +380,31 @@ AutoJus:
 	TaiwanString=Taiwan
 	Send {w 1}
 	Sleep 5
+	Goto KazakA
+KazakA:
+Loop {
+	if ok:=FindText(968, 656, 1234, 752, 0, 0, TextViewOwn)
+    {
+	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+	MouseMove, %X%, %Y%
+	Sleep 5
+	Click
+	Goto KazakB
+}
+}
+KazakB:
+	Loop {
+	if ok:=FindText(989, 511, 1139, 545, 0, 0, TextCountryBarOffset)
+    {
+	X:=ok.1.x+=30, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+	MouseMove, %X%, %Y%
+	Sleep 5
+	Click
 	Goto Kazak1
+	}
+}
 Kazak1:
 	Loop {
 	if ok:=FindText(984, 502, 1154, 592, 0, 0, TextCountryBar)
@@ -454,7 +505,7 @@ Loop {
 }
 Taiwan:
 Loop {
-	if ok:=FindText(990, 519, 1144, 545, 0, 0, TextKazak3)
+	if ok:=FindText(757, 402, 1151, 546, 0, 0, TextKazak4)
     {
 	X:=ok.1.x, Y:=ok.1.y+=5, Comment:=ok.1.id
 	;------------------------------
@@ -575,7 +626,7 @@ URLDownloadToVar(url) {
  WebRequest.Send()
  Return, WebRequest.ResponseText
 }
-if Instr(AA, "Version2")
+if Instr(AA, "Version3")
 {
 	Gui, Update:Add, Text, x5 y40 w145 h25, You are currently running an outdated version       ;Announces the current version the user is using.
 	Gui, Update:Add, Text, x5 y85 w125 h15, Would you like to update?         ;Text asking if the user wants to update to the newer version
