@@ -575,7 +575,7 @@ URLDownloadToVar(url) {
  WebRequest.Send()
  Return, WebRequest.ResponseText
 }
-if Instr(AA, "Version1")
+if Instr(AA, "Version2")
 {
 	Gui, Update:Add, Text, x5 y40 w145 h25, You are currently running an outdated version       ;Announces the current version the user is using.
 	Gui, Update:Add, Text, x5 y85 w125 h15, Would you like to update?         ;Text asking if the user wants to update to the newer version
