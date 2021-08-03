@@ -8,6 +8,8 @@ Do note that there are a few issues with this at the moment that will be patched
 -War democracy not availible yet (Still yet to be worked on)
 
 UPCOMING CHANGES:
--Increased Reliability of Auto justify
--Auto groups deletes any groups previously created (ADDED)
--Update functionality built into the script itself. (ADDED)
+-Increased Reliability of Auto justify (ADDED) 8/3/21
+-Auto groups deletes any groups previously created (ADDED) 8/2/21
+-Update functionality built into the script itself. (ADDED) 8/2/21
+-Auto justify work on fullscreen (ADDED) 8/3/21
+-War democracy automated
