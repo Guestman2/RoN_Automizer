@@ -1,1 +1,2 @@
 text="Version1"
+text2="Version2"
