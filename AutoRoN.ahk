@@ -31,11 +31,22 @@ TextConquest:="|<>*120$57.kzzzzzzzyQrzzzzzzznDsQ7UnCC41yNaNaNarnTrAnQnBmSNytaPaN
 TextVerify:="|<>*130$57.kzzzzzzzyQrzzzzzzznDsQ7UnCC41yNaNaNarnTrAnQnBmSNytaPaNUMnDrAnQnBzmQqNaNaNbqHksQnUsC677zzzzbzzzzzzzzwzzzzzzzzzbzzzzU"
 TextJustWar:="|<>*117$66.zzzznXzzzzztzztnDzbAzztzztzDzaAzztaMEG1nqAVktaPtnBrmBwntaNtnAbmVyntaQNnAbmVkntaT9nCDkVanNaP9nCDtlgn3kMQHDDtnWnzzzzzzTzzzzzzzzzyTzzzzzzzzzwzzzzzU"
 TextViewOwn:="|<>*120$58.ztzzzzzzzwxbzzzsTzznbzzzzAzzziNlaNtuNY6NaPNbbZaH9iPYWSyG9AotUGftt+gn3az2Dbg8nASNyMzAtXAttktXy7aAm"
+TextAutoDem:="|<>*125$46.zzwnzDzw7znDwzznDzDzzzzCMQnVCC4tAnAwnPnBnArnQb1rAnTA34zQnBwrz3wnAnnDgDsQnVC66"
+TextAutoDem2:="|<>*135$62.zzzzvzyzzzzzzyATz7zzw1zzX7zlzzz0DzszzzzzznlzyDzzzzzwwQ7X7UlsT1D60slkAQ3U3l76AMv6CNo0llX6DlbaD0QyMlbwM1knzDaANz60S4zllX6DlbzsDwQMlXgMza3zUD4Q170M0zw7l7UlsD1U"
+TextTaxReform:="|<>*128$67.zzzzzzyDzzzUDzzkDyTzzzyTzztrzDzzzzC7NwtX33V17btYyManAnaNnysz0r9iNnAtsQTYs4rAtaQtiDnByPaQnCRaHtaTAnCNbC+NwtVb3bAm"
+TextWelfareAct:="|<>*128$67.zzzb7zzzzzzbAznDzzzwzwn6TtbzzzwTyRXAQV3VXy7U2FgqNwnazHbb+KtAzNrDBrnZ30aQAs7aPtkVjnAqRzkBwwsntanCTnqSSQwAn5bVttVW"
+TextPolitical:="|<>*132$40.zzqzTzo7zPBzzLTxwzzxQlqVQEpqnPBbvEvhgqyBTiqnPmpynPBbPLwQiL4AU"
+TextPolitical2:="|<>*125$43.zzzTzzyaTtjzzzHDwzzzzca4/XVkpHvBgmTOVlabPCBMmnHhaKiPNhanPLACL7NVY"
+TextPolitical3:="|<>*122$50.zyTzzzzzAzbzzzzzn7tzzzzzwpsH8MSAQ9QarqHCmGGNhlgb0AUaMN/9nn3hbCmnCSkt1nUgslUU"
+TextPolitical4:="|<>*128$14.zDznj03k0w0D7V1s0S333k0w0D03zDzny"
+TextEconomic:="|<>*131$49.zzzzzzzTUzzzzzzjrzzzzzzzvwMsSC4PUAvAan9hayxqnRgqrTSvNiqPPjbNgqPBgkMlqQRar4"
+TextEconomicHigh:="|<>*129$22.zryxnTvrDzjQq243PN7BhgQq6lnPv7BUgzynzzsTs"
+TextEconomicMinimum:="|<>*128$47.zvzjzzzyQrzTzzzwtzzzzzzsXMRV6n216mP9haH+hgqnPBaFPNhaqPAqqnPBgqNxhaqP1go"
 goto Home
 Home:
 Gui, Add, Button, w200 h50 gAutoGroup , Automatic Military Groups 
 Gui, Add, Button, w200 h50 gAutoRes , Automatic Research Rush
-Gui, Add, Button, w200 h50 gAutoDem , (WIP) Brazil/India Auto War Democracy
+Gui, Add, Button, w200 h50 gAutoDem , Brazil/India Auto War Democracy
 Gui, Add, Button, w200 h50 gAutoJus , China autojustify Kazak + Taiwan
 Gui, Add, Button, w200 h50 gUpdate , Check for Update
 Gui, Add, Button, w200 h50 gReadme , View Readme
@@ -370,8 +381,309 @@ Res7:
 	Return
 
 AutoDem:
+WinGet, id, List, Roblox
+IfWinExist ahk_id %id1%
+WinActivate
+send {q 1}
+sleep 5
+goto Autodem1
+Autodem1:
+Loop {
+	if ok:=FindText(755, 359, 1165, 701, 0, 0, TextAutoDem)
+    {
+	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+	MouseMove, %X%, %Y%
+	Sleep 5
+	Click
+	Goto Autodem2
+	}
+	}
+Autodem2:
+Loop {
+	if ok:=FindText(757, 356, 1167, 434, 0, 0, TextAutoDem2)
+    {
+	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+	MouseMove, 947, 536
+	Sleep 5
+	Goto Autodem3
+	}
+	}
+Autodem3:
+Loop {
+	if ok:=FindText(738, 349, 1196, 725, 0, 0, TextTaxReform)
+    {
+	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+	MouseMove, %X%, %Y%
+	Sleep 5
+	Click
+	Goto Autodem4
+	}
+	else 
+	{
+	Sleep 10
+	goto Autodemsrch
+	}
+}
+Autodemsrch:
+Sleep 50
+MouseMove, 947, 536
+Sleep 50
+Click WheelDown
+Sleep 50
+Goto Autodemsrch1
+Autodemsrch1:
+Loop {
+	if ok:=FindText(738, 349, 1196, 725, 0, 0, TextTaxReform)
+    {
+	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+	Sleep 600
+	Goto Autodem3
+	}
+	else 
+	{
+	Sleep 20
+	goto Autodemsrch
+	}
+}
+Autodem4:
+Sleep 5
+MouseMove, 947, 536
+Sleep 5
+Goto Autodemscrollup
+Autodemscrollup:
+Sleep 5
+Send {WheelUp 500}
+Sleep 5
+Send {WheelUp 500}
+Sleep 5
+Send {WheelUp 500}
+Sleep 1000
+Goto Autodem5
+Autodem5:
+Loop {
+	if ok:=FindText(738, 349, 1196, 725, 0, 0, TextWelfareAct)
+    {
+	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+	MouseMove, %X%, %Y%
+	Sleep 5
+	Click
+	Goto Autodem6
+	}
+	else 
+	{
+	Sleep 10
+	goto Autodemsrch2
+	}
+}
+Autodemsrch2:
+Sleep 50
+MouseMove, 947, 536
+Sleep 50
+Click WheelDown
+Sleep 50
+goto Autodemsrch3
+Autodemsrch3:
+Loop {
+	if ok:=FindText(738, 349, 1196, 725, 0, 0, TextWelfareAct)
+    {
+	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+	Sleep 600
+	Goto Autodem5
+	}
+	else 
+	{
+	Sleep 20
+	goto Autodemsrch2
+	}
+}
+Autodem6:
+Sleep 5
+MouseMove, 947, 536
+Sleep 5
+Goto Autodemscrollup2
+Autodemscrollup2:
+Sleep 5
+Send {WheelUp 500}
+Sleep 5
+Send {WheelUp 500}
+Sleep 5
+Send {WheelUp 500}
+Sleep 1000
+Goto Autodem7
+Autodem7:
+Sleep 5
+Send {Z 1}
+Sleep 5
+Goto Autodem8
+Autodem8:
+Sleep 5
+Send {A 1}
+Sleep 5
+MouseMove, 1000, 900
+Sleep 5
+Goto ResearchDem
+ResearchDem:
+Loop {
+	if ok:=FindText(1127, 753, 1455, 927, 0, 0, TextPolitical)
+    {
+	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+	MouseMove, %X%, %Y%
+	Sleep 5
+	Click
+	Sleep 5
+	Click
+	Sleep 5
+	MouseMove, 1000, 900
+	Sleep 5
+	Goto ResearchDem1
+	}
+}
+ResearchDem1:
+Loop {
+	if ok:=FindText(876, 480, 1056, 562, 0, 0, TextPolitical)
+    {
+	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+	MouseMove, %X%, %Y%
+	Sleep 5
+	Click
+	Sleep 5
+	Click
+	Sleep 5
+	MouseMove, 1000, 900
+	Sleep 5
+	Goto ResearchDem2
+	}
+}
+ResearchDem2:
+Loop {
+	if ok:=FindText(1038, 470, 1202, 558, 0, 0, TextPolitical2)
+    {
+	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+	MouseMove, %X%, %Y%
+	Sleep 5
+	Click
+	Sleep 5
+	Click
+	Sleep 5
+	MouseMove, 1000, 900
+	Sleep 5
+	Goto ResearchDem3
+	}
+}
+ResearchDem3:
+Loop {
+	if ok:=FindText(1202, 481, 1358, 557, 0, 0, TextPolitical3)
+    {
+	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+	MouseMove, %X%, %Y%
+	Sleep 5
+	Click
+	Sleep 5
+	Click
+	Sleep 5
+	MouseMove, 1000, 900
+	Sleep 5
+	Goto ResearchDem4
+	}
+}
+ResearchDem4:
+Loop {
+	if ok:=FindText(1344, 461, 1448, 555, 0, 0, TextPolitical4)
+    {
+	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+	MouseMove, %X%, %Y%
+	Sleep 5
+	Click
+	Sleep 5
+	Click
+	Sleep 5
+	MouseMove, 1000, 900
+	Sleep 5
+	Goto ResearchDem5
+	}
+}
+ResearchDem5:
+Sleep 5
+Send {Z 1}
+Sleep 5
+Goto Demlaws
+Demlaws:
+Sleep 5
+Send {E 1}
+Sleep 5
+Goto Demlaws1
+Demlaws1:
+Loop {
+	if ok:=FindText(759, 639, 1169, 717, 0, 0, TextEconomic)
+    {
+	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+	MouseMove, %X%, %Y%
+	Sleep 5
+	Click
+	Sleep 5
+	Goto Demlaws2
+	}
+}
+Demlaws2:
+Loop {
+	if ok:=FindText(909, 437, 1181, 511, 0, 0, TextEconomicHigh)
+    {
+	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+	MouseMove, %X%, %Y%
+	Sleep 5
+	Click
+	Sleep 5
+	MouseMove, 1000, 900
+	Goto Demlaws3
+	}
+}
+Demlaws3:
+Loop {
+	if ok:=FindText(939, 490, 1173, 570, 0, 0, TextEconomicHigh)
+    {
+	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+	MouseMove, %X%, %Y%
+	Sleep 5
+	Click
+	Sleep 5
+	MouseMove, 1000, 900
+	Sleep 5
+	Goto Demlaws4
+	}
+}
+Demlaws4:
+Loop {
+	if ok:=FindText(773, 567, 1149, 625, 0, 0, TextEconomicMinimum)
+    {
+	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+	MouseMove, %X%, %Y%
+	Sleep 5
+	Click
+	Sleep 5
+	MouseMove, 1000, 900
+	Sleep 5
+	Goto Demlawsend
+	}
+}
+Demlawsend:
+Send {Z 1}
+Sleep 5
 Return
-
 AutoJus:
 	WinGet, id, List, Roblox
 	IfWinExist ahk_id %id1%
@@ -626,7 +938,7 @@ URLDownloadToVar(url) {
  WebRequest.Send()
  Return, WebRequest.ResponseText
 }
-if Instr(AA, "Version3")
+if Instr(AA, "Version4")
 {
 	Gui, Update:Add, Text, x5 y40 w145 h25, You are currently running an outdated version       ;Announces the current version the user is using.
 	Gui, Update:Add, Text, x5 y85 w125 h15, Would you like to update?         ;Text asking if the user wants to update to the newer version
