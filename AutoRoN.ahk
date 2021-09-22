@@ -1,7 +1,7 @@
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 #Warn  ; Enable warnings to assist with detecting common errors.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
-t1=A_TickCount, X:=Y:=""
+t1=A_TickCount, X:=Y:="" ; This, and the Strings below it that start with "Text" are the saved text value (using findtext.ahk)  of text found on RoN, which are called in checks.
 TextUpdate:="|<>*158$46.9680T000YMU10007tWC41QV9594E6H4gIgNwF4Tt+VY14G+4v6E4EccFYF0F26V6C7l4AU"
 TextUpdate2:="|<>*149$69.000000000007zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzbzzzUzttztwwTyTwrz7DzDb3znzaTstztwtQkAAr33D31YNaHAVn99z9g/AmPYitBDVAX1aHQYr9Vv9YTYmNgmPC9NAVwkFVaMNl89Ybzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz000000000004"
 TextMilitaryGroups:="|<>*127$43.kTzzzzznjzzzzznzzzzzztz13aM74zUAnAnCMHb9aQbD9rYnCMbYtmNbD9mQnAnBa3D3lMC7zzzzwzzzzzzyTzzzzzzDzk"
@@ -44,17 +44,17 @@ TextEconomicHigh:="|<>*129$22.zryxnTvrDzjQq243PN7BhgQq6lnPv7BUgzynzzsTs"
 TextEconomicMinimum:="|<>*128$47.zvzjzzzyQrzTzzzwtzzzzzzsXMRV6n216mP9haH+hgqnPBaFPNhaqPAqqnPBgqNxhaqP1go"
 goto Home
 Home:
-Gui, Add, Button, w200 h50 gAutoGroup , Automatic Military Groups 
+Gui, Add, Button, w200 h50 gAutoGroup , Automatic Military Groups ; this shit's basically the gui, when you click a button it goes to the speciied function, example being Autogroup.
 Gui, Add, Button, w200 h50 gAutoRes , Automatic Research Rush
 Gui, Add, Button, w200 h50 gAutoDem , Brazil/India Auto War Democracy
 Gui, Add, Button, w200 h50 gAutoJus , China autojustify Kazak + Taiwan
-Gui, Add, Button, w200 h50 gUpdate , Check for Update
+Gui, Add, Button, w200 h50 gUpdate , Check for Update ; This is an interesting one, will be explained on the function Update.
 Gui, Add, Button, w200 h50 gReadme , View Readme
 Gui, Show,, RoN Automater v1
 Return
 
 AutoGroup:
-WinGet, id, List, Roblox
+WinGet, id, List, Roblox ; Searches and then activates a found Roblox session currently opened on the running PC.
 IfWinExist ahk_id %id1%
 WinActivate
 ArmyString := "Army"
@@ -64,7 +64,7 @@ Send {s 1}
 Sleep 5
 Goto Next
 Next:
-Loop {
+Loop { ; This is a loop that finds the text earlier in the script with a coordinate range and moves the mouse to the specified location.
 	if ok:=FindText(1046-150000, 568-150000, 1046+150000, 568+150000, 0, 0, TextMilitaryGroups)
     {
 	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
@@ -75,7 +75,7 @@ Loop {
 	Goto NextB
 }
 }
-NextB:
+NextB: ; This is a loop that finds the text earlier in the script with a coordinate range and moves the mouse to the specified location.
 Loop {
 	if ok:=FindText(751, 356, 1175, 704, 0, 0, TextDisbandGroups)
     {
@@ -91,7 +91,7 @@ Loop {
 	goto Next1
 	}
 }
-NextC:
+NextC: ; This is a loop that finds the text earlier in the script with a coordinate range and does a specified action if the text is found on screen
 Loop {
 	if ok:=FindText(1047, 433, 1121, 489, 0, 0, TextDisbandGroups)
     {
@@ -104,7 +104,7 @@ Loop {
 	Goto NextD
 	}
 }	
-NextD:
+NextD: ; This is a loop that finds the text earlier in the script with a coordinate range and does a specified action if the text is found on screen
 Loop {
 	if ok:=FindText(777, 488, 1127, 560, 0, 0 TextDisbandGroups)
     {
@@ -117,7 +117,7 @@ Loop {
 	Goto NextE
 	}
 }
-NextE:
+NextE: ; This is a loop that finds the text earlier in the script with a coordinate range and does a specified action if the text is found on screen
 Loop {
 	if ok:=FindText(1045, 556, 1135, 620, 0, 0, TextDisbandGroups)
     {
@@ -131,7 +131,7 @@ Loop {
 	}
 }
 Next1:
-Loop {
+Loop { ; This is a loop that finds the text earlier in the script with a coordinate range and does a specified action if the text is found on screen
 	if ok:=FindText(1084-150000, 630-150000, 1084+150000, 630+150000, 0, 0, TextCreateGroups)
     {
 	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
@@ -145,7 +145,7 @@ Loop {
 Next2:
 	Send % ArmyString
 	Sleep 5
-Loop {
+Loop { ; This is a loop that finds the text earlier in the script with a coordinate range and does a specified action if the text is found on screen
 	if ok:=FindText(1084-150000, 630-150000, 1084+150000, 630+150000, 0, 0, TextCreateGroups)
     {
 	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
@@ -161,7 +161,7 @@ Loop {
 }
 }	
 Next3:
-Loop {
+Loop { ; This is a loop that finds the text earlier in the script with a coordinate range and does a specified action if the text is found on screen
 	if ok:=FindText(813-150000, 443-150000, 813+150000, 443+150000, 0, 0, TextArmyGroup)
     {
 	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
@@ -177,7 +177,7 @@ Next4:
 	Sleep 5
 	Goto Next5
 Next5:
-Loop {
+Loop { ; This is a loop that finds the text earlier in the script with a coordinate range and does a specified action if the text is found on screen
 	if ok:=FindText(1084-150000, 630-150000, 1084+150000, 630+150000, 0, 0, TextCreateGroups)
     {
 	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
@@ -193,7 +193,7 @@ Loop {
 }
 }	
 Next6:
-Loop {
+Loop { ; This is a loop that finds the text earlier in the script with a coordinate range and does a specified action if the text is found on screen
 	if ok:=FindText(812-150000, 508-150000, 812+150000, 508+150000, 0, 0, TextNavyGroup)
     {
 	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
@@ -204,12 +204,12 @@ Loop {
 	Goto Next7
 }
 }	
-Next7:
+Next7: 
 	Send % AirString
 	Sleep 5
 	Goto Next8
 Next8:
-	Loop {
+	Loop { ; This is a loop that finds the text earlier in the script with a coordinate range and does a specified action if the text is found on screen
 	if ok:=FindText(1084-150000, 630-150000, 1084+150000, 630+150000, 0, 0, TextCreateGroups)
     {
 	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
@@ -225,7 +225,7 @@ Next8:
 	}
 }
 Next9:
-Loop {
+Loop { ; This is a loop that finds the text earlier in the script with a coordinate range and does a specified action if the text is found on screen
 	if ok:=FindText(805-150000, 571-150000, 805+150000, 571+150000, 0, 0, TextAirGroup)
     {
 	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
@@ -244,7 +244,7 @@ AutoRes:
 	Sleep 5
 	Goto ResFix
 ResFix:
-Loop {
+Loop { ; This is a loop that finds the text earlier in the script with a coordinate range and does a specified action if the text is found on screen
 	if ok:=FindText(557, 710, 1427, 888, 0, 0, TextResearchFix)
     {
 	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
@@ -258,7 +258,7 @@ Loop {
 }
 }
 Res1:
-Loop {
+Loop { ; This is a loop that finds the text earlier in the script with a coordinate range and does a specified action if the text is found on screen
 	if ok:=FindText(958-150000, 523-150000, 958+150000, 523+150000, 0, 0, TextResearch1)
     {
 	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
@@ -274,7 +274,7 @@ Loop {
 }
 }
 Res2:
-Loop {
+Loop { ; This is a loop that finds the text earlier in the script with a coordinate range and does a specified action if the text is found on screen
 	if ok:=FindText(1147-150000, 519-150000, 1147+150000, 519+150000, 0, 0, TextResearch2)
     {
 	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
@@ -292,7 +292,7 @@ Loop {
 }
 Res3:
 Sleep 5
-Loop {
+Loop { ; This is a loop that finds the text earlier in the script with a coordinate range and does a specified action if the text is found on screen
 	if ok:=FindText(1274-150000, 513-150000, 1274+150000, 513+150000, 0, 0, TextResearch3)
     {
 	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
@@ -310,7 +310,7 @@ Loop {
 }
 }
 ResScroll:
-Loop {
+Loop { ; This is a loop that finds the text earlier in the script with a coordinate range and does a specified action if the text is found on screen
 	if ok:=FindText(1371, 476, 1441, 606, 0, 0, TextResearchScroll)
     {
 	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
@@ -322,7 +322,7 @@ Loop {
 }
 }
 Res4:
-Loop {
+Loop { ; This is a loop that finds the text earlier in the script with a coordinate range and does a specified action if the text is found on screen
 	if ok:=FindText(1034-150000, 474-150000, 1034+150000, 474+150000, 0, 0, TextResearch4)
     {
 	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
@@ -340,7 +340,7 @@ Loop {
 }
 }
 Res5:
-Loop {
+Loop { ; This is a loop that finds the text earlier in the script with a coordinate range and does a specified action if the text is found on screen
 	if ok:=FindText(1224-150000, 489-150000, 1224+150000, 489+150000, 0, 0, TextResearch5)
     {
 	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
@@ -358,7 +358,7 @@ Loop {
 }
 }
 Res6:
-Loop {
+Loop { ; This is a loop that finds the text earlier in the script with a coordinate range and does a specified action if the text is found on screen
 	if ok:=FindText(1030-150000, 620-150000, 1030+150000, 620+150000, 0, 0, TextResearch6)
     {
 	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
@@ -928,17 +928,17 @@ Send {z 1}
 Sleep 5
 Return
 
-Update:
+Update: ; Basically, this checks an Update.txt folder uploaded to my github, an outdated version of the macro will find a text string that i add every update.
 AA:= URLDownloadToVar("https://raw.githubusercontent.com/Guestman2/RoN_Automizer/main/Update.txt")
 msgbox % AA
 autoronstring=AutoRoN.ahk
-URLDownloadToVar(url) {
+URLDownloadToVar(url) { ; this makes it so it downloads the URL as a variable, allowing it to open and read the URL download without saving it locally on your pc.
  WebRequest := ComObjCreate("WinHttp.WinHttpRequest.5.1")
  WebRequest.Open("GET", url)
  WebRequest.Send()
  Return, WebRequest.ResponseText
 }
-if Instr(AA, "Version4")
+if Instr(AA, "Version5") ; If the string is detected, it will prompt you to update.
 {
 	Gui, Update:Add, Text, x5 y40 w145 h25, You are currently running an outdated version       ;Announces the current version the user is using.
 	Gui, Update:Add, Text, x5 y85 w125 h15, Would you like to update?         ;Text asking if the user wants to update to the newer version
@@ -957,7 +957,7 @@ Gui Update:Cancel
 return
 
 Yes:
-Run, https://raw.githubusercontent.com/Guestman2/RoN_Automizer/main/AutoRoN.ahk
+Run, https://raw.githubusercontent.com/Guestman2/RoN_Automizer/main/AutoRoN.ahk ; opens the link on your default web browser, and does a check to see if it loaded in.
 Loop {
 	if ok:=FindText(0, 67, 1916, 1025, 0, 0, TextUpdate)
     {
@@ -966,7 +966,7 @@ Loop {
 	Goto Yes1
 }
 }
-Yes1:
+Yes1: ; This then automatically prompts a save and checks if the save prompt appears, then renames the file to AutoRoN.ahk, letting you finish saving it.
 Send {Ctrl down}{s}{Ctrl up}
 Gui Update:Cancel
 Loop {
@@ -984,13 +984,13 @@ Yes2:
 return
 
 Readme:
-READMESTRING:= URLDownloadToVar("https://raw.githubusercontent.com/Guestman2/RoN_Automizer/main/README.md")
+READMESTRING:= URLDownloadToVar("https://raw.githubusercontent.com/Guestman2/RoN_Automizer/main/README.md")  ; simply retrieves and displays the readme in a msgbox.
 msgbox % READMESTRING
 return
 GuiClose:
 ExitApp
 
-;===== Copy The Following Functions To Your Own Code Just once =====
+;===== Copy The Following Functions To Your Own Code Just once ===== This shit's from the findtext() external function, auto generated, ignore this.
 
 
 ;--------------------------------
