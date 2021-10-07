@@ -5,6 +5,7 @@ First, THIS REQUIRES AUTOHOTKEY, SEARCH FOR IT ON GOOGLE, ITS FREE AND SAFE
 Do note that there are a few issues with this at the moment that will be patched in future updates
 -If using with fullscreen, you must alt tab to switch windows to the GUI itself, do not worry, it automatically refocuses your window in this case.
 -Auto war democracy is a new feature, be sure to test it out and report any bugs.
+-Only compatible with 1920x1080 resolution at the moment.
 
 UPCOMING CHANGES:
 -Increased Reliability of Auto justify (ADDED) 8/3/21
