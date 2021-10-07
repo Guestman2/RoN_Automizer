@@ -42,15 +42,26 @@ TextPolitical4:="|<>*128$14.zDznj03k0w0D7V1s0S333k0w0D03zDzny"
 TextEconomic:="|<>*131$49.zzzzzzzTUzzzzzzjrzzzzzzzvwMsSC4PUAvAan9hayxqnRgqrTSvNiqPPjbNgqPBgkMlqQRar4"
 TextEconomicHigh:="|<>*129$22.zryxnTvrDzjQq243PN7BhgQq6lnPv7BUgzynzzsTs"
 TextEconomicMinimum:="|<>*128$47.zvzjzzzyQrzTzzzwtzzzzzzsXMRV6n216mP9haH+hgqnPBaFPNhaqPAqqnPBgqNxhaqP1go"
+TextPopulation:="|<>**50$61.00003k1k00Tk001MDw008Q000g5q005rxzzryzyzyvbdqPb5novRhrPBxiqvhVrPhawrPhrrvhqvPPhqvvBivNhhqrRhXDHmuL/birlyjTzzzzTy00K000000000D0000000E"
+TextUnits:="|<>**50$28.00703z0Tk/o1P0jTzjyxdqAvqvPjjPhiyxiqyxivPxtvhmByzzzc"
+TextDestroyers:="|<>**50$52.zU0S00002D01M0000/jzxzzzzzjwwlKTzCixjjRrvPvvq6xrRhVgivyrRrSymvjxRrwvv8P6CLbOlgzjzzzzPzk00000PU0000001w00U"
+TextFrigate:="|<>**50$36.03U000zXk0S0VWk0K0jzzzrygesNlbjiqyrTViqwr3jitqrTgirqrSgikmtWwzrTzy00kk0000Tk00U"
+TextBattleship:="|<>**50$52.0007U1ss3y1zq05Xk8M5rM0K/0izrRzzTzyvb4LDBCosThrPvrPRiwrRVjRhqzPRqzhqrPhhrPzLPRVmtalXRhDzzzzzzzrU0000001M00000007W"
+TextCarrier:="|<>**50$75.0s001w0000s07rU00AsTU07U0qg001R7A00g05rzzzvirzzzzzfhNpb0xzCeiRTRiyzPjgSrRjjPhqLnRBXavgBUBiyvPdjqrRjgRhrrPRqyqvhxahjCtPatmrRlgrzzzzznzzzzzY"
+TextSubmarines:="|<>**50$58.00D0001k03y0g0007U0AM2k000K00jzvzzzzzzuzRdorbJdtwxqvNjhqvTxrPhqwrPgDvRiqPPRirzhavNhhqvSltORamrPi/xzzTzzzzzc"
+TextUnitBuild:="|<>**50$67.0000S000003U000T000003zXs0Aj0zw01aFg06oUM700r8q03uEA0k0TYPzxzD6STrzmBv7n1X/DPSN6w1tUlbbhjAXSQwtsk6qraFjDCIUM3vPn8rZb+EAyxhtaHmnZ86HCqwnttNma3/bSS8sggtHlbXbD60qKQcMk3kLVlv/CLAM7gPkTlxztyDz7zz"
 goto Home
 Home:
+Gui, Add, Text, 1
 Gui, Add, Button, w200 h50 gAutoGroup , Automatic Military Groups ; this shit's basically the gui, when you click a button it goes to the speciied function, example being Autogroup.
 Gui, Add, Button, w200 h50 gAutoRes , Automatic Research Rush
 Gui, Add, Button, w200 h50 gAutoDem , Brazil/India Auto War Democracy
 Gui, Add, Button, w200 h50 gAutoJus , China autojustify Kazak + Taiwan
+Gui, Add, Button, w200 h50 gShipHelper , Fleet helper
+Gui, Add, Text, ys, 
 Gui, Add, Button, w200 h50 gUpdate , Check for Update ; This is an interesting one, will be explained on the function Update.
 Gui, Add, Button, w200 h50 gReadme , View Readme
-Gui, Show,, RoN Automater v1
+Gui, Show,, RoN Automater v5
 Return
 
 AutoGroup:
@@ -924,9 +935,242 @@ Loop {
 }
 }
 Taiwan9:
-Send {z 1}
-Sleep 5
+	Send {z 1}
+	Sleep 5
 Return
+ShipHelper:
+Gui, Destroy
+Gui, Ship:Add, Text,, Be sure to select a city before running this. It will build it all in ONE city.
+Gui, Ship:Add, Text,, Aircraft Carrier
+Gui, Ship:Add, Edit
+Gui, Ship:Add, UpDown, vCarriers Range0-20, 0
+Gui, Ship:Add, Text,, Battleships
+Gui, Ship:Add, Edit
+Gui, Ship:Add, UpDown, vBattleships Range0-20, 0
+Gui, Ship:Add, Text,, Destroyers
+Gui, Ship:Add, Edit
+Gui, Ship:Add, UpDown, vDestroyers Range0-20, 0
+Gui, Ship:Add, Text,, Submarines
+Gui, Ship:Add, Edit
+Gui, Ship:Add, UpDown, vSubmarines Range0-20, 0
+Gui, Ship:Add, Text,, Frigates
+Gui, Ship:Add, Edit
+Gui, Ship:Add, UpDown, vFrigates Range0-20, 0
+Gui, Ship:Add, Button, gContinueShips , Continue
+Gui, Ship:Add, Button, ym gCancelShips , Cancel
+Gui, Ship:Show,, Ship Helper
+return
+CancelShips:
+Gui, Ship:Destroy
+goto Home
+ContinueShips:
+Gui, Ship:Submit, NoHide
+goto BuildingShips
+BuildingShips:
+WinGet, id, List, Roblox ; Searches and then activates a found Roblox session currently opened on the running PC.
+IfWinExist ahk_id %id1%
+WinActivate
+	Loop { ; This is a loop that finds the text earlier in the script with a coordinate range and does a specified action if the text is found on screen
+		if ok:=FindText(0, 513, 418, 965, 0, 0, TextPopulation)
+		{
+		X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+		Sleep 5
+		Goto BuildingShips1
+	}
+	Else
+	{
+		Sleep 5
+		Goto BuildingShips0
+	}
+	}
+Buildingships0:
+	Loop { ; This is a loop that finds the text earlier in the script with a coordinate range and does a specified action if the text is found on screen
+		if ok:=FindText(0, 548, 414, 906, 0, 0, TextUnitBuild)
+		{
+		X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+		Goto BuildingShips2
+	}
+	Else
+	{
+		Sleep 5
+		Goto BuildingShips
+	}
+	}
+BuildingShips1:
+	Loop { ; This is a loop that finds the text earlier in the script with a coordinate range and does a specified action if the text is found on screen
+		if ok:=FindText(0, 548, 414, 906, 0, 0, TextUnits)
+		{
+		X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+		MouseMove, %X%, %Y%
+		Sleep 5
+		Click
+		Sleep 5
+		Goto BuildingShips2
+	}
+	}	
+BuildingShips2:
+	Loop { ; This is a loop that finds the text earlier in the script with a coordinate range and does a specified action if the text is found on screen
+		if ok:=FindText(0, 584, 486, 944, 0, 0,  TextUnitBuild)
+		{
+		X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+		Sleep 5
+		MouseMove, 75, 705
+		Send {WheelUp 500}
+		Sleep 5
+		Goto BuildingShips3
+	}
+	}
+BuildingShips3:
+Send {WheelDown 1} 
+Sleep 25
+Goto BuildingShips4
+BuildingShips4:
+if (Destroyers > 0)
+{
+	goto BuildDestroyers
+}
+else
+{
+	goto BuildingShips5
+}
+BuildingShips5:
+if (Frigates > 0)
+{
+	goto BuildFrigates
+}
+else
+{
+	goto BuildingShips6
+}
+Buildingships6:
+if (Battleships > 0)
+{
+	goto BuildBattleships
+}
+else
+{
+	goto BuildingShips7
+}
+BuildingShips7:
+if (Carriers > 0)
+{
+	goto BuildCarriers
+}
+else
+{
+	goto BuildingShips8
+}
+BuildingShips8:
+if (Submarines > 0)
+{
+	goto BuildSubmarines
+}
+else
+{
+	goto Finished
+}
+BuildDestroyers:
+Sleep 5
+MouseMove, 1000, 100
+	Loop { ; This is a loop that finds the text earlier in the script with a coordinate range and does a specified action if the text is found on screen
+		if ok:=FindText(0, 559, 334, 935, 0, 0, TextDestroyers)
+		{
+		X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+		Sleep 5
+		MouseMove, %X%, %Y%
+		Sleep 5
+		Click, %Destroyers%
+		Sleep 5
+		Goto BuildingShips5
+		
+	}
+	}	
+BuildFrigates:
+MouseMove, 1000, 1000
+Sleep 5
+	Loop { ; This is a loop that finds the text earlier in the script with a coordinate range and does a specified action if the text is found on screen
+		if ok:=FindText(0, 552, 324, 906, 0, 0, TextFrigate)
+		{
+		X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+		Sleep 5
+		MouseMove, %X%, %Y%
+		Sleep 5
+		Click, %Frigates%
+		Sleep 5
+		Goto BuildingShips6
+		
+	}
+	}
+BuildBattleships:
+MouseMove, 1000, 1000
+Sleep 5
+	Loop { ; This is a loop that finds the text earlier in the script with a coordinate range and does a specified action if the text is found on screen
+		if ok:=FindText(0, 548, 486, 924, 0, 0, TextBattleship)
+		{
+		X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+		Sleep 5
+		MouseMove, %X%, %Y%
+		Sleep 5
+		Click, %Battleships%
+		Sleep 5
+		Goto BuildingShips7
+		
+	}
+	}
+BuildCarriers:
+Sleep 5
+MouseMove, 75, 705
+Sleep 20
+Send {WheelDown 500}
+Sleep 20
+MouseMove, 1000, 1000
+Sleep 5
+	Loop { ; This is a loop that finds the text earlier in the script with a coordinate range and does a specified action if the text is found on screen
+		if ok:=FindText(0, 548, 486, 924, 0, 0, TextCarrier)
+		{
+		X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+		Sleep 5
+		MouseMove, %X%, %Y%
+		Sleep 5
+		Click, %Carriers%
+		Sleep 5
+		Goto BuildingShips8
+		
+	}
+	}
+BuildSubmarines:
+Sleep 5
+MouseMove, 75, 705
+Sleep 20
+Send {WheelDown 500}
+Sleep 20
+MouseMove, 1000, 100
+Sleep 5
+	Loop { ; This is a loop that finds the text earlier in the script with a coordinate range and does a specified action if the text is found on screen
+		if ok:=FindText(0, 548, 486, 924, 0, 0, TextSubmarines)
+		{
+		X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+		Sleep 5
+		MouseMove, %X%, %Y%
+		Sleep 5
+		Click, %Submarines%
+		Sleep 5
+		Goto Finished
+		
+	}
+	}
+Finished:
+Msgbox All done!
+return
 
 Update: ; Basically, this checks an Update.txt folder uploaded to my github, an outdated version of the macro will find a text string that i add every update.
 AA:= URLDownloadToVar("https://raw.githubusercontent.com/Guestman2/RoN_Automizer/main/Update.txt")
@@ -938,9 +1182,9 @@ URLDownloadToVar(url) { ; this makes it so it downloads the URL as a variable, a
  WebRequest.Send()
  Return, WebRequest.ResponseText
 }
-if Instr(AA, "Version5") ; If the string is detected, it will prompt you to update.
+if Instr(AA, "Version6") ; If the string is detected, it will prompt you to update.
 {
-	Gui, Update:Add, Text, x5 y40 w145 h25, You are currently running an outdated version       ;Announces the current version the user is using.
+	Gui, Update:Add, Text, x5 y40 w145 h15, You are running an older version of the macro.       ;Announces the current version the user is using.
 	Gui, Update:Add, Text, x5 y85 w125 h15, Would you like to update?         ;Text asking if the user wants to update to the newer version
 	Gui, Update:Add, Button, x85 y180 w43 h23 gYes, Yes                        ;If pressed it will go to the Yes sub to download the newest version available;
 	Gui, Update:Add, Button, x135 y180 w43 h23 gHome1, No                     ;Will skip the update and go to the main functions
@@ -948,7 +1192,7 @@ if Instr(AA, "Version5") ; If the string is detected, it will prompt you to upda
 }
 else
 {
-	Msgbox There are no updates availible at this time.
+	Msgbox There are no updates available at this time.
 	Gosub Home1
 }
 return
