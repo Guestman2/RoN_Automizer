@@ -12,3 +12,5 @@ UPCOMING CHANGES:
 -Update functionality built into the script itself. (ADDED) 8/2/21
 -Auto justify work on fullscreen (ADDED) 8/3/21
 -War democracy automated (ADDED) 9/10/21
+-Fleet helper (Select number of ships you want to build in 1 city ADDED 10/7/21)
+-1366x768 resolution mode someday?
