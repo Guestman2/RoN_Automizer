@@ -23,3 +23,6 @@ UPCOMING CHANGES:
 -Made auto research rush more efficient, doesnt need to swipe twice anymore (ADDED) 3/30/22
 
 -1366x768 resolution mode someday?
+
+
+Bruh auto update only works on browser page zoom level 110%
