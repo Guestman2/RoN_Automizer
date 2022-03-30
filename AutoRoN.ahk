@@ -386,10 +386,21 @@ Loop { ; This is a loop that finds the text earlier in the script with a coordin
 }
 }
 Res7:
-	SendEvent {Click 699 548 Down}{Click 1365 523 Up}
+Loop { ; This is a loop that finds the text earlier in the script with a coordinate range and does a specified action if the text is found on screen
+	if ok:=FindText(557, 710, 1427, 888, 0, 0, TextResearchFix)
+    {
+	X:=ok.1.x, Y:=ok.1.y, Comment:=ok.1.id
+	;------------------------------
+	MouseMove %X%, %Y%
+	Sleep 5
+	Click
+	Sleep 5
+	Click
 	Sleep 5
 	Send {z 1}
 	Return
+}
+}
 
 AutoDem:
 WinGet, id, List, Roblox
@@ -1182,7 +1193,7 @@ URLDownloadToVar(url) { ; this makes it so it downloads the URL as a variable, a
  WebRequest.Send()
  Return, WebRequest.ResponseText
 }
-if Instr(AA, "Version6") ; If the string is detected, it will prompt you to update.
+if Instr(AA, "Version7") ; If the string is detected, it will prompt you to update.
 {
 	Gui, Update:Add, Text, x5 y40 w145 h15, You are running an older version of the macro.       ;Announces the current version the user is using.
 	Gui, Update:Add, Text, x5 y85 w125 h15, Would you like to update?         ;Text asking if the user wants to update to the newer version
